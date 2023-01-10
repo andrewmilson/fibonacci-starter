@@ -8,6 +8,6 @@
 rustup toolchain install nightly
 
 # 3. run to make sure everything is working
-cargo +nightly run
+cargo +nightly build
 ```
 
