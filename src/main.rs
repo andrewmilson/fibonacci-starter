@@ -13,12 +13,12 @@ use ministark::{
 use pollster::block_on;
 use std::time::Instant;
 
+const NUM_FRI_QUERIES: usize = 30;
+const LDE_BLOWUP_FACTOR: usize = 30;
+
 fn main() {
     // project goal - convince a verifier we know the 65536th (2^16) fibonacci number
     let n = 2usize.pow(16);
-
-    // 2. generate a nx1 matrix full of fibbonacci numbers (prover only)
-    let fib_matrix = build_fib_matrix(n);
 
     // proof options for 128 bit security
     let num_fri_queries = 30;
@@ -33,6 +33,9 @@ fn main() {
         fri_folding_factor,
         fri_max_remainder_size,
     );
+
+    // 1. generate a nx1 matrix full of fibbonacci numbers (prover only)
+    let fib_matrix = build_fib_matrix(n);
 
     // 2. generate STARK proof
     let prover = FibProver::new(proof_options);
